@@ -16,10 +16,10 @@ app.use(express.static('build'));
 /** ---------- EXPRESS ROUTES ---------- **/
 app.use('/api/todo', todoRouter);
 // Adding Get Route
-app.get('/todos', (req, res) => {
-    console.log(`In /todos GET`);
-    res.send(toDoList);
-  });
+// app.get('/todos', (req, res) => {
+//     console.log(`In /todos GET`);
+//     res.send(toDoList);
+ // });
 /** ---------- START SERVER ---------- **/
 app.listen(PORT,  () => {
     console.log('Listening on port: ', PORT);
