@@ -35,7 +35,7 @@ function AddToDo ({AddOn}) {
   return (
     <div>
       <input id='todo' onChange={(e)=>setTodoText(e.target.value)} type="text" placeholder='To-Do' />
-      <button onClick={todoPost}>Add</button>
+      <button onClick={AddToDo}>Add</button>
     </div>
   );
 

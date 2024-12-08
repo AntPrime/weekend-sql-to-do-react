@@ -36,18 +36,20 @@ router.post( '/', ( req, res )=>{
 // PUT
 
 // DELETE
-router.delete( '/', ( req, res )=>{
-    console.log( 'in /todos DELETE:', req.body );
-        // assemble query
-        const queryText = `DELETE FROM "todos" WHERE id=$1;`;
-        const values = [ req.body.id ];
+router.delete( '/:id', ( req, res )=>{
+    
+    const id = req.params.id;
+    console.log( 'Deleting to do with id:', id );
+    const queryText = `DELETE FROM "todos" WHERE id=$1;`;
+  
         // run pool.query
-        pool.query( queryText, values ).then( ( results )=>{
-            res.sendStatus( 200 ); // "OK"
-        }).catch( ( err )=>{
+    pool.query( queryText, [id] )
+        .then( ( results )=>{
+        res.sendStatus( 200 );
+    }).catch( ( err )=>{
             // handle any errors
             console.log( err );
-            res.sendStatus( 400 );
+            res.sendStatus( 500 );
         })
 })
 

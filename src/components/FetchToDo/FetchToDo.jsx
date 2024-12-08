@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { useEffect } from 'react';
 import axios from 'axios'
 import AddToDo from '../AddToDo/AddToDo';
-import DeleteTodo from '../DeleteTodo/DeleteTodo';
+
 
 function FetchToDo () {
 
@@ -10,7 +10,7 @@ function FetchToDo () {
   const [todoStatus, setTodoStatus] = useState('Not Done');
   const [ todoText, setTodoText ] = useState('');
 
-  useEffect(() => {
+  const fetchTodos = () =>{
     axios({
       method: 'GET',
       url: '/api/todo'
@@ -22,6 +22,27 @@ function FetchToDo () {
       .catch((error) => {
         console.log('error in artist get', error);
       });
+  };
+  
+  function DeleteTodo ( id ) {
+    
+    console.log('Deleting to do with Id:', id)
+    
+      axios({
+        method: 'DELETE',
+        url: `/api/todo/${id}`
+      })
+        .then(() => {
+          console.log('Deleted Todo successfully!');
+          fetchTodos();
+        })
+        .catch((error) => {
+          console.log('Error deleting todo', error);
+        });
+      }
+    
+  useEffect(() => {
+    fetchTodos();
   }, []);
 
 
@@ -36,17 +57,15 @@ function FetchToDo () {
           <th>Delete</th>
           </tr>
         </thead>
-        
+        <tbody>
         {todoList.map((todo)=>(
-          <tbody key={todo.id}>
-             <tr> 
+             <tr key={todo.id}> 
               <td>{todo.text}</td>
              <td><button>{todoStatus}</button></td>
-             <DeleteTodo todo={todo}/>
+             <td><button onClick={()=>DeleteTodo(todo.id)}>DELETE</button></td>
              </tr> 
-             </tbody>
           ))}
-        
+        </tbody>
       </table>
     </div>
   );
