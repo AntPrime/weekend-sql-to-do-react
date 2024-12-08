@@ -18,7 +18,21 @@ router.get( '/', ( req, res )=>{
     })
 })
 // POST
-
+router.post( '/', ( req, res )=>{
+    console.log( 'in /todo POST:', req.body );
+        // assemble query
+        const queryText = `INSERT into "todos" ( "text", "isComplete" ) VALUES ( $1, $2 );`;
+        const values = [ req.body.text, req.body.isComplete ];
+        // run pool.query
+        pool.query( queryText, values ).then( ( results )=>{
+            // return results.rows
+            res.sendStatus( 200 ); // "CREATED"
+        }).catch( ( err )=>{
+            // handle any errors
+            console.log( err );
+            res.sendStatus( 500 );
+        })
+})
 // PUT
 
 // DELETE
