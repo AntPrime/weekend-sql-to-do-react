@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { useEffect } from 'react';
 import axios from 'axios'
 import AddToDo from '../AddToDo/AddToDo';
-
+import DeleteTodo from '../DeleteTodo/DeleteTodo';
 
 function FetchToDo () {
 
@@ -42,7 +42,7 @@ function FetchToDo () {
              <tr> 
               <td>{todo.text}</td>
              <td><button>{todoStatus}</button></td>
-             <td><button>DELETE</button></td>
+             <DeleteTodo todo={todo}/>
              </tr> 
              </tbody>
           ))}
