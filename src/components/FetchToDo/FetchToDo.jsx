@@ -48,7 +48,7 @@ function FetchToDo () {
 
   return (
     <div>
-      <AddToDo AddOn={FetchToDo}/>
+      <AddToDo AddOn={fetchTodos}/>
       <table>
         <thead>
           <tr>

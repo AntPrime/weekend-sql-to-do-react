@@ -5,10 +5,10 @@ import axios from 'axios'
 function AddToDo ({AddOn}) {
 
   const [ todoText, setTodoText ] = useState('');
+  const [todoStatus, setTodoStatus] = useState(false);
 
   const todoPost = () =>{
-    
-    const [todoStatus, setTodoStatus] = useState(false);
+   
 
     let todoPosting = {
       text: todoText,
@@ -22,7 +22,7 @@ function AddToDo ({AddOn}) {
       .then((response) => {
         console.log("POST worked! Woot woot")
       
-       FetchToDo();
+       AddOn();
        setTodoText("");
         
       })
@@ -30,12 +30,13 @@ function AddToDo ({AddOn}) {
         console.error("POST /api/todo is broken",error)
 
       })
+      console.log(todoText)
   }
 
   return (
     <div>
-      <input id='todo' onChange={(e)=>setTodoText(e.target.value)} type="text" placeholder='To-Do' />
-      <button onClick={AddToDo}>Add</button>
+      <input value={todoText} onChange={(e)=>setTodoText(e.target.value)} type="text" placeholder='To-Do' />
+      <button onClick={todoPost}>Add</button>
     </div>
   );
 
