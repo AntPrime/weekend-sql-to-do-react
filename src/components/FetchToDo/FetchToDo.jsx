@@ -7,7 +7,6 @@ import AddToDo from '../AddToDo/AddToDo';
 function FetchToDo () {
 
   const [todoList, setTodoList] = useState([]);
-  const [todoStatus, setTodoStatus] = useState('Not Done');
   const [ todoText, setTodoText ] = useState('');
 
   const fetchTodos = () =>{
@@ -45,6 +44,33 @@ function FetchToDo () {
     fetchTodos();
   }, []);
 
+  const toggleComplete = (id, currentStatus)=>{
+    const updatedStatus = (() => {
+      console.log('clicked to update status')
+      switch (currentStatus) {
+        case true:
+          return false;
+        case false:
+          return true;
+        default:
+          return false;
+      }
+    }) ();
+    // PUTting axios here 
+    axios({
+      method:'PUT',
+      url:`/api/todo/${id}`,
+      data:{isComplete: updatedStatus}
+    })
+    .then(()=> {
+      console.log('Successfully Updated Task');
+      fetchTodos();
+    }).catch((error)=>{
+      console.log('Error updating isComplete', error)
+    });
+
+  };
+  
 
   return (
     <div>
@@ -53,16 +79,16 @@ function FetchToDo () {
         <thead>
           <tr>
           <th>To-Do Item</th>
-          <th>Status</th>
-          <th>Delete</th>
+          <th>Do | Undo</th>
+          <th>Remove</th>
           </tr>
         </thead>
         <tbody>
         {todoList.map((todo)=>(
              <tr key={todo.id}> 
-              <td>{todo.text}</td>
-             <td><button>{todoStatus}</button></td>
-             <td><button onClick={()=>DeleteTodo(todo.id)}>DELETE</button></td>
+              <td>👉🏾{todo.text} </td>
+             <td><button onClick={() => toggleComplete(todo.id, todo.isComplete)}>{todo.isComplete ? '⊠ Complete' : '▢ Incomplete'}</button></td>
+             <td><button onClick={()=>DeleteTodo(todo.id)}> ❌ 𝔻𝔼𝕃𝔼𝕋𝔼 </button></td>
              </tr> 
           ))}
         </tbody>

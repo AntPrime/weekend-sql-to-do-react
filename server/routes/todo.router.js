@@ -34,7 +34,19 @@ router.post( '/', ( req, res )=>{
         })
 })
 // PUT
+router.put('/:id', (req,res)=> {
+    const { id } = req.params;
+    const values = [req.body.isComplete, id];
+    const queryText = 'UPDATE "todos" SET "isComplete"=$1 WHERE "id"=$2'
+    pool.query(queryText, values)
+    .then((results)=> {
+        res.sendStatus(200);
+    }).catch((err)=>{
+        console.log(err);
+        res.sendStatus(400);
+    })
 
+})
 // DELETE
 router.delete( '/:id', ( req, res )=>{
     
