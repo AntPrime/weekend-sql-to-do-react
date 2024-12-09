@@ -21,7 +21,7 @@ function AddToDo ({AddOn}) {
     })
       .then((response) => {
         console.log("POST worked! Woot woot")
-      
+        //console.log(todoText)
        AddOn();
        setTodoText("");
         
@@ -30,7 +30,7 @@ function AddToDo ({AddOn}) {
         console.error("POST /api/todo is broken",error)
 
       })
-      console.log(todoText)
+      
   }
 
   return (

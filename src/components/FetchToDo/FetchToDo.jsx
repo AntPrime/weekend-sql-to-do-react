@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { useEffect } from 'react';
 import axios from 'axios'
 import AddToDo from '../AddToDo/AddToDo';
-
+import TodoItem from '../TodoItem/TodoItem';
 
 function FetchToDo () {
 
@@ -23,6 +23,10 @@ function FetchToDo () {
       });
   };
   
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+  
   function DeleteTodo ( id ) {
     
     console.log('Deleting to do with Id:', id)
@@ -40,9 +44,7 @@ function FetchToDo () {
         });
       }
     
-  useEffect(() => {
-    fetchTodos();
-  }, []);
+
 
   const toggleComplete = (id, currentStatus)=>{
     const updatedStatus = (() => {
@@ -79,16 +81,16 @@ function FetchToDo () {
         <thead>
           <tr>
           <th>To-Do Item</th>
-          <th>Do | Undo</th>
+          <th>Status</th>
           <th>Remove</th>
           </tr>
         </thead>
         <tbody>
-        {todoList.map((todo)=>(
-             <tr key={todo.id}> 
-              <td>👉🏾{todo.text} </td>
-             <td><button onClick={() => toggleComplete(todo.id, todo.isComplete)}>{todo.isComplete ? '⊠ Complete' : '▢ Incomplete'}</button></td>
-             <td><button onClick={()=>DeleteTodo(todo.id)}> ❌ 𝔻𝔼𝕃𝔼𝕋𝔼 </button></td>
+        {todoList.map((todos)=>(
+             <tr key={todos.id}> 
+              <td>👉🏾{todos.text} </td>
+             <td><button onClick={() => toggleComplete(todos.id, todos.isComplete)}>{todos.isComplete ? '⊠ Complete' : '▢ Incomplete'}</button></td>
+             <td><button onClick={()=>DeleteTodo(todos.id)}> ❌ 𝔻𝔼𝕃𝔼𝕋𝔼 </button></td>
              </tr> 
           ))}
         </tbody>
