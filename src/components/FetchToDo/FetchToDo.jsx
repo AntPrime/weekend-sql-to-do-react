@@ -26,7 +26,7 @@ function FetchToDo () {
   useEffect(() => {
     fetchTodos();
   }, []);
-  
+
   function DeleteTodo ( id ) {
     
     console.log('Deleting to do with Id:', id)
@@ -43,7 +43,6 @@ function FetchToDo () {
           console.log('Error deleting todo', error);
         });
       }
-    
 
 
   const toggleComplete = (id, currentStatus)=>{
@@ -70,7 +69,6 @@ function FetchToDo () {
     }).catch((error)=>{
       console.log('Error updating isComplete', error)
     });
-
   };
   
 
@@ -89,8 +87,12 @@ function FetchToDo () {
         {todoList.map((todos)=>(
              <tr key={todos.id}> 
               <td>👉🏾{todos.text} </td>
-             <td><button onClick={() => toggleComplete(todos.id, todos.isComplete)}>{todos.isComplete ? '⊠ Complete' : '▢ Incomplete'}</button></td>
-             <td><button onClick={()=>DeleteTodo(todos.id)}> ❌ 𝔻𝔼𝕃𝔼𝕋𝔼 </button></td>
+             <td>
+              <button className={`statusButton ${todos.isComplete ? 'complete' : 'incomplete'}`} 
+              onClick={() => toggleComplete(todos.id, todos.isComplete)}>
+              {todos.isComplete ? '⊠ Complete' : '▢ Incomplete'}</button>
+            </td>
+             <td><button className='deleteButton' onClick={()=>DeleteTodo(todos.id)}> ❌ 𝔻𝔼𝕃𝔼𝕋𝔼 </button></td>
              </tr> 
           ))}
         </tbody>

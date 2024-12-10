@@ -24,11 +24,9 @@ function AddToDo ({AddOn}) {
         //console.log(todoText)
        AddOn();
        setTodoText("");
-        
       })
       .catch((error) => {
         console.error("POST /api/todo is broken",error)
-
       })
       
   }
