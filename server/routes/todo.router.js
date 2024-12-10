@@ -6,7 +6,7 @@ const pool = require('../modules/pool.js');
 router.get( '/', ( req, res )=>{
     console.log( '/todo GET' );
     // assemble query
-    const queryText = 'SELECT * FROM todos';
+    const queryText = 'SELECT * FROM todos ORDER by "id"';
     // run pool.query
     pool.query( queryText ).then( ( results )=>{
         // return results.rows
