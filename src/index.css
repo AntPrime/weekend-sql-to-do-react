@@ -5,7 +5,7 @@ body {
   background-color: tan;
 }
 
-.statusButton{
+.statusButton:hover{
   background-color: white;
   color: black;
   border: 2px solid red;
@@ -28,7 +28,7 @@ body {
   color: black;
 }
 
-.deleteButton {
+.deleteButton:hover {
   background-color: white;
   color: black;
   border: 2px solid black;
