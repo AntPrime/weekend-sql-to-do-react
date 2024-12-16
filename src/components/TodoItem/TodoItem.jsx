@@ -2,7 +2,7 @@ import {useState} from 'react';
 import axios from 'axios'
 
 
-function TodoItem ({todos}) {
+function TodoItem ({todos, fetchTodos}) {
   function DeleteTodo ( id ) {
     
     console.log('Deleting to do with Id:', id)
@@ -13,7 +13,7 @@ function TodoItem ({todos}) {
       })
         .then(() => {
           console.log('Deleted Todo successfully!');
-          todos();
+          fetchTodos();
         })
         .catch((error) => {
           console.log('Error deleting todo', error);
@@ -41,7 +41,7 @@ function TodoItem ({todos}) {
     })
     .then(()=> {
       console.log('Successfully Updated Task');
-      todos();
+      fetchTodos();
     }).catch((error)=>{
       console.log('Error updating isComplete', error)
     });
@@ -51,9 +51,13 @@ function TodoItem ({todos}) {
 
   return (
     <tr> 
-    <td>👉🏾{todos.todos.text} </td>
-   <td><button onClick={() => toggleComplete(todos.id, todos.isComplete)}>{todos.isComplete ? '⊠ Complete' : '▢ Incomplete'}</button></td>
-   <td><button onClick={()=>DeleteTodo(todos.id)}> ❌ 𝔻𝔼𝕃𝔼𝕋𝔼 </button></td>
+    <td>👉🏾{todos.text} </td>
+   <td>
+    <button className={`statusButton ${todos.isComplete ? 'complete' : 'incomplete'}`} 
+    onClick={() => toggleComplete(todos.id, todos.isComplete)}>
+    {todos.isComplete ? '⊠ Complete' : '▢ Incomplete'}</button>
+  </td>
+   <td><button className='deleteButton' onClick={()=>DeleteTodo(todos.id)}> ❌ 𝔻𝔼𝕃𝔼𝕋𝔼 </button></td>
    </tr> 
   );
 

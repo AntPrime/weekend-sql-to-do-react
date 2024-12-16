@@ -27,49 +27,49 @@ function FetchToDo () {
     fetchTodos();
   }, []);
 
-  function DeleteTodo ( id ) {
+  // function DeleteTodo ( id ) {
     
-    console.log('Deleting to do with Id:', id)
+  //   console.log('Deleting to do with Id:', id)
     
-      axios({
-        method: 'DELETE',
-        url: `/api/todo/${id}`
-      })
-        .then(() => {
-          console.log('Deleted Todo successfully!');
-          fetchTodos();
-        })
-        .catch((error) => {
-          console.log('Error deleting todo', error);
-        });
-      }
+  //     axios({
+  //       method: 'DELETE',
+  //       url: `/api/todo/${id}`
+  //     })
+  //       .then(() => {
+  //         console.log('Deleted Todo successfully!');
+  //         fetchTodos();
+  //       })
+  //       .catch((error) => {
+  //         console.log('Error deleting todo', error);
+  //       });
+  //     }
 
 
-  const toggleComplete = (id, currentStatus)=>{
-    const updatedStatus = (() => {
-      console.log('clicked to update status')
-      switch (currentStatus) {
-        case true:
-          return false;
-        case false:
-          return true;
-        default:
-          return false;
-      }
-    }) ();
-    // PUTting axios here 
-    axios({
-      method:'PUT',
-      url:`/api/todo/${id}`,
-      data:{isComplete: updatedStatus}
-    })
-    .then(()=> {
-      console.log('Successfully Updated Task');
-      fetchTodos();
-    }).catch((error)=>{
-      console.log('Error updating isComplete', error)
-    });
-  };
+  // const toggleComplete = (id, currentStatus)=>{
+  //   const updatedStatus = (() => {
+  //     console.log('clicked to update status')
+  //     switch (currentStatus) {
+  //       case true:
+  //         return false;
+  //       case false:
+  //         return true;
+  //       default:
+  //         return false;
+  //     }
+  //   }) ();
+  //   // PUTting axios here 
+  //   axios({
+  //     method:'PUT',
+  //     url:`/api/todo/${id}`,
+  //     data:{isComplete: updatedStatus}
+  //   })
+  //   .then(()=> {
+  //     console.log('Successfully Updated Task');
+  //     fetchTodos();
+  //   }).catch((error)=>{
+  //     console.log('Error updating isComplete', error)
+  //   });
+  // };
   
 
   return (
@@ -84,22 +84,14 @@ function FetchToDo () {
           </tr>
         </thead>
         <tbody>
-        {todoList.map((todos)=>(
-             <tr key={todos.id}> 
-              <td>👉🏾{todos.text} </td>
-             <td>
-              <button className={`statusButton ${todos.isComplete ? 'complete' : 'incomplete'}`} 
-              onClick={() => toggleComplete(todos.id, todos.isComplete)}>
-              {todos.isComplete ? '⊠ Complete' : '▢ Incomplete'}</button>
-            </td>
-             <td><button className='deleteButton' onClick={()=>DeleteTodo(todos.id)}> ❌ 𝔻𝔼𝕃𝔼𝕋𝔼 </button></td>
-             </tr> 
+        {todoList.map((todos,index)=>(
+          <TodoItem key={index} todos={todos} fetchTodos={fetchTodos}/>
+            
           ))}
         </tbody>
       </table>
     </div>
   );
-
 }
 
 export default FetchToDo
