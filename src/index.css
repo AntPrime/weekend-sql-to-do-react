@@ -38,3 +38,10 @@ body {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+
+thead{
+  background-color: gray;
+}
+tbody{
+  background-color: lightgray;
+}

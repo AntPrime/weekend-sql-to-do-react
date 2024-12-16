@@ -48,7 +48,6 @@ function TodoItem ({todos, fetchTodos}) {
 
   };
   
-
   return (
     <tr> 
     <td>👉🏾{todos.text} </td>
