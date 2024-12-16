@@ -50,7 +50,7 @@ function TodoItem ({todos, fetchTodos}) {
   
   return (
     <tr> 
-    <td>👉🏾{todos.text} </td>
+    <td>👉🏾 {todos.text} </td>
    <td>
     <button className={`statusButton ${todos.isComplete ? 'complete' : 'incomplete'}`} 
     onClick={() => toggleComplete(todos.id, todos.isComplete)}>
