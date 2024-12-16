@@ -5,7 +5,66 @@ body {
   background-color: tan;
 }
 
-.statusButton:hover{
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1em;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden; /* For rounded corners */
+}
+table th, td {
+  padding: 12px 15px;
+  border: 1px solid #ddd; /* Subtle borders */
+}
+input {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus{
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+thead tr {
+  background-color: rgb(81, 80, 80); /* Primary color */
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+tbody {
+  text-align: center;
+  background-color: lightgray;
+}
+
+tbody tr:nth-child(even){
+  background-color: #f9f9f9;
+}
+
+.InputButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.InputButton:hover{
+   background-color: #45a049;
+}
+
+.statusButton{
   background-color: white;
   color: black;
   border: 2px solid red;
@@ -13,7 +72,7 @@ body {
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .statusButton.complete {
@@ -28,7 +87,7 @@ body {
   color: black;
 }
 
-.deleteButton:hover {
+.deleteButton {
   background-color: white;
   color: black;
   border: 2px solid black;
@@ -39,9 +98,3 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-thead{
-  background-color: gray;
-}
-tbody{
-  background-color: lightgray;
-}
